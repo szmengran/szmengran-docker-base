@@ -1,0 +1,39 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.szmengran.docker</groupId>
+    <artifactId>szmengran-docker-base</artifactId>
+    <version>jdk17</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <docker.registry>registry.cn-guangzhou.aliyuncs.com</docker.registry>
+    </properties>
+
+    <build>
+        <finalName>szmengran-docker-base</finalName>
+        <plugins>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.13</version>
+                <executions>
+                    <execution>
+                        <id>docker</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>build</goal>
+                            <goal>push</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <repository>${docker.registry}/szmengran/${project.build.finalName}</repository>
+                    <tag>${project.version}</tag>
+                    <username>szmengran@sina.cn</username>
+                    <password></password>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
