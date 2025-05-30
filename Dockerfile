@@ -21,7 +21,7 @@ COPY arthas/unzip /bin/
 ADD arthas/arthas-bin.zip ${work_dir}/
 
 RUN mkdir -p /opt/arthas \
-  && unzip ${work_dir}/arthas-bin.zip -C /opt/arthas \
+  && unzip ${work_dir}/arthas-bin.zip -d /opt/arthas \
   && ln -s /opt/arthas/arthas-bin.jar /usr/local/bin/arthas-boot.jar \
   && echo -e '#!/bin/sh\nexec java -jar /usr/local/bin/arthas-boot.jar "$@"' > /usr/local/bin/arthas \
   && chmod +x /usr/local/bin/arthas
@@ -34,3 +34,5 @@ RUN chown -R publish:publish /data /home/publish
 USER publish
 
 CMD ["shell/springboot-start.sh"]
+
+# 构建命令 docker build -t registry.cn-guangzhou.aliyuncs.com/szmengran/szmengran-docker-base:jdk17.0.12 .
