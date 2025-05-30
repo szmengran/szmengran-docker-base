@@ -1,4 +1,4 @@
-FROM registry.cn-guangzhou.aliyuncs.com/szmengran/centos-jdk:17.0.2
+FROM registry.cn-guangzhou.aliyuncs.com/szmengran/rockylinux:jdk17.0.12
 
 MAINTAINER Joe <android_li@sina.cn>
 
@@ -18,7 +18,13 @@ ARG work_dir="/data/dubbo"
 WORKDIR ${work_dir}
 
 COPY arthas/unzip /bin/
-ADD arthas/arthas-3.6.7.tar.gz ${work_dir}/
+ADD arthas/arthas-bin.zip ${work_dir}/
+
+RUN mkdir -p /opt/arthas \
+  && unzip ${work_dir}/arthas-bin.zip -C /opt/arthas \
+  && ln -s /opt/arthas/arthas-bin.jar /usr/local/bin/arthas-boot.jar \
+  && echo -e '#!/bin/sh\nexec java -jar /usr/local/bin/arthas-boot.jar "$@"' > /usr/local/bin/arthas \
+  && chmod +x /usr/local/bin/arthas
 
 COPY bin/* ${work_dir}/shell/
 RUN chmod +x shell/*
