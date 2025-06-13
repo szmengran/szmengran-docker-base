@@ -18,7 +18,7 @@ ARG work_dir="/data/dubbo"
 WORKDIR ${work_dir}
 
 RUN yum install -y unzip
-ADD arthas/arthas-bin.zip ${work_dir}/
+ADD arthas/arthas-arthas-all-4.0.5.tar.gz ${work_dir}/
 
 RUN mkdir -p /opt/arthas \
   && unzip ${work_dir}/arthas-bin.zip -d /opt/arthas \
