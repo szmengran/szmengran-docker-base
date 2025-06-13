@@ -3,7 +3,8 @@ RUN yum install -y iproute iputils bind-utils net-tools nc telnet tcpdump lsof v
 RUN sh -c "$(cur -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" && echo 'JAVA_HOME=/usr/java/jdk-17.0.12' >> ~/.zshrc && echo 'export PATH=$JAVA_HOME/bin:$PATH' >> ~/.zshrc
 RUN echo 'export LC_ALL=en_US.UTF-8' >> ~/.zshrc && echo 'export LANG=en_US.UTF-8' >> ~/.zshrc
 # wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
-ADD ./jdk-17.0.12 /usr/java/
+# 自动解压
+ADD jdk-17.0.12_linux-x64_bin.tar.gz /usr/java/
 RUN ln -s /usr/java/jdk-17.0.12/bin/java /usr/bin/java
 RUN ln -s /usr/java/jdk-17.0.12/bin/jstat /usr/bin/jstat
 RUN ln -s /usr/java/jdk-17.0.12/bin/jmap /usr/bin/jmap
