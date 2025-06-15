@@ -2,6 +2,7 @@ FROM rockylinux/rockylinux:9-ubi
 RUN yum install -y iproute iputils bind-utils net-tools nc telnet tcpdump lsof vim zsh git && rm -rf /var/cache/yum
 RUN sh -c "$(cur -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" && echo 'JAVA_HOME=/usr/java/jdk-17.0.12' >> ~/.zshrc && echo 'export PATH=$JAVA_HOME/bin:$PATH' >> ~/.zshrc
 RUN echo 'export LC_ALL=en_US.UTF-8' >> ~/.zshrc && echo 'export LANG=en_US.UTF-8' >> ~/.zshrc
+RUN source ~/.zshrc
 # wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
 # 自动解压
 ADD jdk-17.0.12_linux-x64_bin.tar.gz /usr/java/
