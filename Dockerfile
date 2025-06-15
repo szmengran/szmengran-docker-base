@@ -19,7 +19,7 @@ WORKDIR ${work_dir}
 
 ADD arthas/arthas.tar.gz ${work_dir}/
 
-RUN ln -s ${work_dir}/arthas-boot.jar /usr/local/bin/arthas-boot.jar \
+RUN ln -s ${work_dir}/arthas/arthas-boot.jar /usr/local/bin/arthas-boot.jar \
   && echo -e '#!/bin/sh\nexec java -jar /usr/local/bin/arthas-boot.jar "$@"' > /usr/local/bin/arthas \
   && chmod +x /usr/local/bin/arthas
 
