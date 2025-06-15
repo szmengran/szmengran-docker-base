@@ -17,12 +17,9 @@ ARG work_dir="/data/dubbo"
 
 WORKDIR ${work_dir}
 
-RUN yum install -y unzip
-ADD arthas/arthas-arthas-all-4.0.5.tar.gz ${work_dir}/
+ADD arthas/arthas.tar.gz ${work_dir}/
 
-RUN mkdir -p /opt/arthas \
-  && unzip ${work_dir}/arthas-bin.zip -d /opt/arthas \
-  && ln -s /opt/arthas/arthas-bin.jar /usr/local/bin/arthas-boot.jar \
+RUN ln -s ${work_dir}/arthas-boot.jar /usr/local/bin/arthas-boot.jar \
   && echo -e '#!/bin/sh\nexec java -jar /usr/local/bin/arthas-boot.jar "$@"' > /usr/local/bin/arthas \
   && chmod +x /usr/local/bin/arthas
 
